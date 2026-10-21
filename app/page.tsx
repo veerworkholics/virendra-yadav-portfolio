@@ -1,18 +1,18 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
+import { sitePath } from '@/data/site-path'
 import { useEffect, useRef, useState } from 'react'
 import { motion, useMotionTemplate, useMotionValue, useSpring } from 'framer-motion'
 import gsap from 'gsap'
-import { ArrowRight, Code2, Smartphone, Layers, Aperture } from 'lucide-react'
+import { ArrowRight, Code2, Database, Users } from 'lucide-react'
 import { SectionHeading } from '@/components/SectionHeading'
 import { ScrollToTop } from '@/components/ScrollToTop'
 
 const stats = [
-  { label: 'Years Experience', value: 1, suffix: '+' },
-  { label: 'Featured Projects', value: 7, suffix: '+' },
-  { label: 'Client Satisfaction', value: 100, suffix: '%' },
+  { label: 'Years Experience', value: 7, suffix: '+' },
+  { label: 'Primary Framework', value: 0, suffix: 'Laravel' },
+  { label: 'Specialization', value: 0, suffix: 'SaaS' },
 ]
 
 function CountUp({ value, suffix = '' }: { value: number; suffix?: string }) {
@@ -34,7 +34,7 @@ function CountUp({ value, suffix = '' }: { value: number; suffix?: string }) {
     return () => cancelAnimationFrame(frame)
   }, [value])
 
-  return <span>{display}{suffix}</span>
+  return <span>{value ? display : null}{suffix}</span>
 }
 
 function MagneticButton({ href, children, className }: { href: string; children: React.ReactNode; className?: string }) {
@@ -58,7 +58,7 @@ function MagneticButton({ href, children, className }: { href: string; children:
 
   return (
     <motion.a
-      href={href}
+      href={sitePath(href)}
       onMouseMove={handleMove}
       onMouseLeave={reset}
       onMouseEnter={handleMove}
@@ -168,22 +168,22 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 sm:gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14">
             <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, ease: 'easeOut' }} className="space-y-6 sm:space-y-8">
-              <p className="hero-badge inline-flex items-center gap-2 rounded-full border border-violet-400/25 bg-violet-500/10 px-3 py-2 text-[10px] uppercase tracking-[0.28em] text-violet-200 sm:px-4 sm:text-xs">MERN Stack Developer</p>
+              <p className="hero-badge inline-flex items-center gap-2 rounded-full border border-violet-400/25 bg-violet-500/10 px-3 py-2 text-[10px] uppercase tracking-[0.28em] text-violet-200 sm:px-4 sm:text-xs">Senior Laravel Developer &amp; Team Lead</p>
               <div className="space-y-3 sm:space-y-4">
                 <p className="text-xs uppercase tracking-[0.32em] text-slate-300/80 sm:text-sm">Hi, I&apos;m</p>
                 <h1 className="text-4xl font-black leading-[0.92] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
-                  <span className="hero-word block">Sujal</span>
-                  <span className="hero-word block bg-gradient-to-r from-violet-400 via-cyan-300 to-slate-100 bg-clip-text text-transparent">Prajapati</span>
+                  <span className="hero-word block">Virendra</span>
+                  <span className="hero-word block bg-gradient-to-r from-amber-200 via-amber-300 to-yellow-500 bg-clip-text text-transparent">Yadav</span>
                 </h1>
               </div>
-              <p className="hero-copy max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8 lg:text-xl">I build responsive full-stack applications with MongoDB, Express.js, React.js, and Node.js. I specialize in REST APIs, authentication systems, and polished user experiences for growth-driven products.</p>
+              <p className="hero-copy max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8 lg:text-xl">I build dependable SaaS and business applications with Laravel, CodeIgniter, PHP, and MySQL. With 7+ years of experience, I bring application architecture, REST API development, database optimization, and team leadership to every project.</p>
 
               <div className="hero-copy flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <MagneticButton href="/Sujal_Prajapati_MERN_Stack_Resume.pdf" className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 to-violet-500 px-5 py-3.5 text-sm font-semibold text-slate-950 shadow-[0_20px_60px_rgba(56,189,248,0.18)] transition duration-300 hover:brightness-110 sm:px-6 sm:py-4">
+                <MagneticButton href="/Virendra_Yadav_CV.pdf" className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 to-violet-500 px-5 py-3.5 text-sm font-semibold text-slate-950 shadow-[0_20px_60px_rgba(56,189,248,0.18)] transition duration-300 hover:brightness-110 sm:px-6 sm:py-4">
                   Download Resume
                 </MagneticButton>
                 <MagneticButton href="/contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-500 via-cyan-400 to-slate-100 px-5 py-3.5 text-sm font-semibold text-slate-950 shadow-[0_0_30px_rgba(34,211,238,0.55),0_20px_60px_rgba(124,58,237,0.18)] transition duration-300 hover:brightness-105 sm:px-6 sm:py-4 animate-[pulse_2.8s_ease-in-out_infinite]">
-                  Hire Me <ArrowRight size={18} />
+                  Let&apos;s Talk Code <ArrowRight size={18} />
                 </MagneticButton>
                 <MagneticButton href="/projects" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-slate-900/80 px-5 py-3.5 text-sm font-semibold text-slate-100 transition duration-300 hover:border-cyan-400/30 hover:bg-slate-900/95 sm:px-6 sm:py-4">
                   View Projects
@@ -201,7 +201,7 @@ export default function HomePage() {
                     style={{ transformStyle: 'preserve-3d' }}
                     className="rounded-[1.5rem] border border-white/10 bg-slate-950/85 p-5 shadow-glow sm:rounded-[2rem] sm:p-6"
                   >
-                    <p className="text-2xl font-semibold text-white sm:text-3xl">
+                    <p className="text-xl font-semibold text-white sm:text-2xl">
                       <CountUp value={item.value} suffix={item.suffix} />
                     </p>
                     <p className="mt-2 text-xs text-slate-400 sm:text-sm">{item.label}</p>
@@ -231,8 +231,8 @@ export default function HomePage() {
                   className="relative h-[320px] w-full sm:h-[420px] lg:h-[560px]"
                 >
                   <Image
-                    src="/image4.png"
-                    alt="Workstation desk with monitors and laptop"
+                    src={sitePath('/virendra-yadav-neon-hero.png')}
+                    alt="Virendra Yadav, Senior Laravel Developer, at a blue and violet workstation"
                     fill
                     className="object-contain rounded-[2rem] object-top sm:rounded-[2.5rem]"
                     sizes="(max-width: 640px) 100vw, (max-width: 1000px) 75vw, 760px"
@@ -246,12 +246,12 @@ export default function HomePage() {
 
       <section className="px-4 pb-16 sm:px-5 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <SectionHeading eyebrow="Quick Intro" title="Building Ideas Into Digital Experiences" subtitle="I create premium applications that bring product vision to life with polished UX, fast performance, and thoughtful engineering." />
+          <SectionHeading eyebrow="Quick Intro" title="Clean Code. Lasting Impact." subtitle="I connect business needs with maintainable PHP applications, reliable integrations, and thoughtful technical leadership." />
           <div className="grid gap-6 md:grid-cols-3">
             {[
-              { title: 'Reliable Architecture', text: 'Clean structure for frontend, backend, and mobile solutions.', icon: Code2 },
-              { title: 'Responsive Design', text: 'Interfaces that look refined on mobile, tablet, and desktop.', icon: Smartphone },
-              { title: 'Fast Delivery', text: 'Focused, efficient execution for production-ready work.', icon: Aperture },
+              { title: 'Reliable Architecture', text: 'Laravel and CodeIgniter applications for multi-tenant SaaS, ERP, and business workflows.', icon: Code2 },
+              { title: 'APIs & Database Design', text: 'REST APIs, JWT authentication, MySQL optimization, and payment and messaging integrations.', icon: Database },
+              { title: 'Technical Leadership', text: 'End-to-end delivery, code reviews, developer mentoring, and stakeholder collaboration.', icon: Users },
             ].map((feature, index) => {
               const Icon = feature.icon
               return (

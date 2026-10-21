@@ -33,12 +33,12 @@ export function Navbar() {
       className={`sticky top-0 z-50 border-b border-white/10 transition-all duration-300 ${scrollY > 15 ? 'bg-slate-950/65 shadow-[0_30px_100px_rgba(15,23,42,0.35)] backdrop-blur-2xl' : 'bg-slate-950/40 backdrop-blur-xl'}`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
-        <Link href="/" className="group inline-flex items-center gap-3 rounded-full border border-cyan-400/15 bg-slate-900/60 px-4 py-3 text-sm font-semibold text-white shadow-[0_20px_60px_rgba(56,189,248,0.18)] transition hover:border-cyan-400/30 hover:text-cyan-100">
-          <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 via-violet-500 to-slate-900 text-lg font-black text-white shadow-[0_25px_80px_rgba(56,189,248,0.2)] transition group-hover:scale-[1.03]">
-            SP
+        <Link href="/" className="group inline-flex items-center gap-3 rounded-full border border-cyan-400/15 bg-slate-900/60 px-4 py-3 text-sm font-semibold text-white shadow-[0_20px_60px_rgba(34,211,238,0.18)] transition hover:border-cyan-400/30 hover:text-cyan-100">
+          <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 via-violet-500 to-slate-900 text-lg font-black text-white shadow-[0_25px_80px_rgba(34,211,238,0.2)] transition group-hover:scale-[1.03]">
+            VY
           </span>
           <span className="hidden text-sm font-semibold text-slate-100 sm:inline">
-            Sujal <span className="text-cyan-300">Praajapati</span>
+            Virendra <span className="text-cyan-300">Yadav</span>
           </span>
         </Link>
 
@@ -59,7 +59,7 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-4">
-          <Link href="/contact" className="hidden items-center gap-2 rounded-full border border-cyan-400/30 bg-slate-950/30 px-5 py-3 text-sm font-semibold text-white shadow-[0_20px_60px_rgba(56,189,248,0.16)] transition hover:bg-cyan-500/10 hover:text-cyan-100 md:inline-flex">
+          <Link href="/contact" className="hidden items-center gap-2 rounded-full border border-cyan-400/30 bg-slate-950/30 px-5 py-3 text-sm font-semibold text-white shadow-[0_20px_60px_rgba(34,211,238,0.16)] transition hover:bg-cyan-500/10 hover:text-cyan-100 md:inline-flex">
             Let&apos;s Connect
             <ArrowRight size={16} />
           </Link>
@@ -91,7 +91,7 @@ export function Navbar() {
               <Link
                 href="/contact"
                 onClick={() => setOpen(false)}
-                className="mt-2 inline-flex items-center justify-center rounded-full border border-cyan-400/30 bg-slate-900/70 px-5 py-3 text-sm font-semibold text-white shadow-[0_20px_60px_rgba(56,189,248,0.16)] transition hover:bg-cyan-500/10 hover:text-cyan-100"
+                className="mt-2 inline-flex items-center justify-center rounded-full border border-cyan-400/30 bg-slate-900/70 px-5 py-3 text-sm font-semibold text-white shadow-[0_20px_60px_rgba(34,211,238,0.16)] transition hover:bg-cyan-500/10 hover:text-cyan-100"
               >
                 Let&apos;s Connect
                 <ArrowRight size={16} />

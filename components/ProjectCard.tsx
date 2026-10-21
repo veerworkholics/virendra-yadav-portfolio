@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { sitePath } from '@/data/site-path'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface ProjectCardProps {
@@ -78,7 +79,7 @@ export function ProjectCard({ title, description, tech, image, liveUrl, repoUrl 
                 ×
               </button>
               <div className="max-h-[80vh] overflow-hidden bg-slate-950">
-                <img src={image} alt={title} className="h-full w-full object-contain" />
+                <img src={sitePath(image)} alt={title} className="h-full w-full object-contain" />
               </div>
             </motion.div>
           </motion.div>

@@ -7,11 +7,11 @@ import { Footer } from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
-  title: 'Sujal Prajapati | Full Stack Web & Mobile App Developer',
-  description: 'Premium portfolio for Sujal Prajapati showcasing web and mobile development expertise.',
+  title: 'Virendra Yadav | Senior Laravel Developer',
+  description: 'Virendra Yadav, Senior Laravel Developer and Team Lead in Indore with 7+ years of experience in PHP, multi-tenant SaaS, REST APIs, and MySQL.',
   openGraph: {
-    title: 'Sujal Prajapati | Full Stack Web & Mobile App Developer',
-    description: 'Premium portfolio for Sujal Prajapati showcasing web and mobile development expertise.',
+    title: 'Virendra Yadav | Senior Laravel Developer',
+    description: 'Virendra Yadav, Senior Laravel Developer and Team Lead in Indore with 7+ years of experience in PHP, multi-tenant SaaS, REST APIs, and MySQL.',
     type: 'website',
     locale: 'en_US',
   },
@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={inter.variable}>
       <body>
-        <div className="min-h-screen bg-[radial-gradient(circle_at_top,rgba(124,58,237,0.12),transparent_18%),radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.08),transparent_16%),#060816] text-slate-100">
+        <div className="min-h-screen bg-[radial-gradient(circle_at_top,rgba(124,58,237,0.12),transparent_18%),radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.08),transparent_16%),#07081c] text-slate-100">
           <Navbar />
           <main>{children}</main>
           <Footer />

@@ -1,51 +1,18 @@
-export const projects = [
-  {
-    title: 'Dhakad Matrimony Website ',
-    description: 'Community-focused matrimonial platform with user registration, profile creation, partner search, profile verification, shortlisting, and secure matchmaking workflows. Integrated REST APIs for smooth profile and matchmaking data management.',
-    tech: ['Next.js', 'Node.js', 'MongoDB', 'REST API' , ],
-    image: 'image2.png',
-    liveUrl: 'https://dhakadmatrimony.com/',
-    repoUrl: '#',
-  },
-  {
-    title: 'Namo Sandwich Admin Panel',
-    description: 'Internal business management system for handling kitchen operations, internal orders, item quantities, order history, checklists, and department-wise workflows. Built with role-based screens and API-driven data management.',
-    tech: ['React', 'Node.js', 'MongoDB', 'REST API' , ],
-    image: 'image.png',
-    liveUrl: 'http://206.189.130.102/namo/admin/dashboard',
-    repoUrl: '#',
-  },
-  {
-    title: 'Patil Hardware Website',
-    description: 'Hardware service platform that allows customers to explore multiple service categories, submit service requests, select preferred schedules, and provide address details. Includes request tracking and notification workflows.',
-    tech: ['React', 'Node.js', 'MongoDB', 'REST API'],
-    image: 'image5.png',
-    liveUrl: 'https://app.patilhardware.com/home',
-    repoUrl: '#',
-  },
-   {
-    title: 'Dhakad Matrimony Mobile App',
-    description: 'Cross-platform matrimonial app offering profile discovery, match suggestions, shortlisting, profile management, chat, and premium features. Designed with a simple mobile-first interface for a smooth matchmaking experience.',
-    tech: ['MongoDB', 'REST API' , 'react-native'],
-    image: 'dhakadapp.png',
-    liveUrl: 'https://dhakadmatrimony.com/',
-    repoUrl: '#',
-  },
+export interface ProjectLink { label: string; url: string }
+export interface Project { title: string; company: string; category: string; description: string; links?: ProjectLink[] }
 
-    {
-    title: 'Namo Sandwich Mobile App ',
-    description: 'Mobile application designed for kitchen staff to manage daily checklists, create internal orders, track order status, review order history, and communicate through an integrated support/chat system.',
-    tech: [ 'MongoDB', 'REST API' , 'react-native'],
-    image: 'namoappimg.png',
-    liveUrl: 'http://206.189.130.102/namo/admin/dashboard',
-    repoUrl: '#',
-  },
-  {
-    title: 'Patil Hardware Mobile App',
-    description: 'Customer-focused mobile app for discovering hardware services such as plumbing, carpentry, painting, electrical work, waterproofing, and more. Users can select a service, schedule a visit, submit their details, and track requests.',
-    tech: [ 'MongoDB', 'REST API'],
-    image: 'patilappimg.png',
-    liveUrl: 'https://app.patilhardware.com/home',
-    repoUrl: '#',
-  },
+// Add confirmed software URLs to a project using links: [{ label: "Visit website", url: "https://..." }].
+export const projects: Project[] = [
+ { title: 'Restaurant Management System', links: [{ label: 'Visit Restaurant Software', url: 'https://restaurant.chaloonline.in/' }], company: 'Chalo Online', category: 'Restaurant & POS', description: 'POS billing, QR menus, kitchen order tickets (KOT), online ordering, and inventory management.' },
+ { title: 'Appointment Management System', company: 'Chalo Online', category: 'Business Operations', description: 'Appointment scheduling and management platform within a suite of business applications.' },
+ { title: 'Staff Management System', company: 'Chalo Online', category: 'Business Operations', description: 'Staff management platform supporting business operations.' },
+ { title: 'Electronics Management System', company: 'Chalo Online', category: 'Business Operations', description: 'Electronics management platform developed alongside restaurant, appointment, and staff management systems.' },
+ { title: 'FretBox', links: [{ label: 'Visit FretBox', url: 'https://www.fretbox.in/' }], company: 'Workholics Infocorp', category: 'SaaS', description: 'Hostel and residential management SaaS platform.' },
+ { title: 'ShubhLagans.com & SMVPST.com', links: [{ label: 'Visit ShubhLagans', url: 'https://shubhlagans.com/' }, { label: 'Visit SMVPST', url: 'https://smvpst.com/' }], company: 'Workholics Infocorp', category: 'Community', description: 'Matrimonial platforms in a broader portfolio of industry-specific web applications.' },
+ { title: 'SBGBT & JobJatra.com', links: [{ label: 'Visit SBGBT', url: 'https://www.sbgbteam.com/' }], company: 'Workholics Infocorp', category: 'Community', description: 'Social networking platform and job portal.' },
+ { title: 'Veg Tawa', company: 'Workholics Infocorp', category: 'Restaurant & POS', description: 'Restaurant and cafe management platform.' },
+ { title: 'DAVV, UCMAS India & FLASH India', links: [{ label: 'Visit FLASH India', url: 'https://flash.abacusedu.co/' }], company: 'Workholics Infocorp', category: 'Education', description: 'University portal and online examination platforms.' },
+ { title: 'Einstein Kidz Abacus & M-Learning India', company: 'Workholics Infocorp', category: 'Education', description: 'Learning, examination, and education platforms.' },
+ { title: 'AryanHerbals.com', links: [{ label: 'Visit Aryan Herbals', url: 'https://aryanherbals.com/' }], company: 'Workholics Infocorp', category: 'Commerce', description: 'E-commerce platform.' },
+ { title: 'Sunder Masala', links: [{ label: 'Visit Sunder Masala', url: 'http://order.sundermasala.com/' }], company: 'Workholics Infocorp', category: 'Commerce', description: 'Coupon and offer management system.' },
 ]

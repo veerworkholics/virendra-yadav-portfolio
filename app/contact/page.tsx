@@ -1,22 +1,20 @@
-import { Mail, Phone, Linkedin, Github } from 'lucide-react'
+import { Mail, Phone } from 'lucide-react'
 import { SectionHeading } from '@/components/SectionHeading'
 import { ContactForm } from '@/components/ContactForm'
 
-const details = [
-  { label: 'Email', value: 'sujalprajapati9000@gmail.com', icon: Mail, href: 'mailto:sujalprajapati9000@gmail.com' },
-  { label: 'Phone', value: '+91 9009058225', icon: Phone, href: 'tel:+919009058225' },
-  { label: 'LinkedIn', value: 'https://www.linkedin.com/in/sujal-prajapati-46651732a/', icon: Linkedin, href: 'https://www.linkedin.com/in/sujal-prajapati-46651732a/' },
-  { label: 'GitHub', value: 'https://github.com/900sujal', icon: Github, href: 'https://github.com/900sujal' },
+const details: { label: string; value: string; icon: typeof Mail; href: string }[] = [
+  { label: 'Email', value: 'vir.yadav92@gmail.com', icon: Mail, href: 'mailto:vir.yadav92@gmail.com' },
+  { label: 'Mobile', value: '+91 90749 00032', icon: Phone, href: 'tel:+919074900032' },
 ]
 
 export default function ContactPage() {
   return (
     <section className="px-4 py-12 sm:px-5 sm:py-16 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <SectionHeading eyebrow="Contact" title="Let's Build Something Great Together" subtitle="I&apos;m open to opportunities, collaborations and interesting projects. Reach out to start the conversation." />
+        <SectionHeading eyebrow="Contact" title="Let?s Make Your Next Build Count" subtitle="I&apos;m open to opportunities, collaborations and interesting projects. Reach out to start the conversation." />
         <div className="grid gap-6 md:gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10">
           <div className="space-y-4 rounded-[1.5rem] border border-white/10 bg-slate-950/80 p-4 shadow-glow sm:p-5 lg:space-y-6 lg:p-8">
-            {details.map(item => (
+            <h2 className="text-2xl font-semibold text-white">Work with Virendra</h2><p className="text-slate-400 leading-7">Laravel and CodeIgniter development, API integrations, and practical backend architecture.</p>{details.map(item => (
               <a
                 key={item.label}
                 href={item.href}

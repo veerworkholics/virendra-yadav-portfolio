@@ -1,0 +1,7 @@
+﻿export const profile = { name: 'Virendra Yadav', role: 'Senior Laravel Developer & Team Lead', location: 'Indore, Madhya Pradesh', email: 'vir.yadav92@gmail.com', resume: '/Virendra_Yadav_CV.pdf', summary: 'Senior software developer and team lead with 7+ years of experience delivering SaaS, ERP, e-commerce, and business management applications with Laravel, CodeIgniter, PHP, and MySQL.' }
+export const experience = [
+ { company: 'Workholics Infocorp', role: 'Senior PHP Laravel Developer', period: 'August 2026 – Present', details: 'Rejoined on 1 August 2026. Leading Laravel and PHP development, architecture, REST APIs, database optimization, and team coordination.' },
+ { company: 'Chalo Online', role: 'Senior PHP Developer', period: 'March 2026 – July 2026', details: 'Led restaurant, appointment, staff, and electronics management platform development. Designed Laravel applications and APIs, managed databases and deployments, and collaborated with stakeholders.' },
+ { company: 'Workholics Infocorp', role: 'Senior PHP Developer', period: 'August 2019 – February 2026', details: 'Developed SaaS and enterprise applications with Laravel and CodeIgniter. Built REST APIs, optimized MySQL databases, mentored developers, and performed code reviews.' },
+]
+export const education = [ ['Master of Social Work (MSW)', '2018'], ['Post Graduate Diploma in Computer Applications (PGDCA)', '2016'], ['Bachelor of Commerce', '2015'] ]
