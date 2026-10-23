@@ -51,7 +51,7 @@ export default function AboutPage() {
               </div>
 
               <h2 className="text-2xl font-black text-white sm:text-3xl lg:text-4xl">
-                Virendra JI <span className="bg-gradient-to-r from-cyan-300 via-sky-300 to-violet-400 bg-clip-text text-transparent">Yadav</span>
+                Virendra <span className="bg-gradient-to-r from-cyan-300 via-sky-300 to-violet-400 bg-clip-text text-transparent">Yadav</span>
               </h2>
 
               <p className="text-base leading-relaxed text-slate-300">
