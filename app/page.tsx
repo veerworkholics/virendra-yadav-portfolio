@@ -1,18 +1,40 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { sitePath } from '@/data/site-path'
 import { useEffect, useRef, useState } from 'react'
 import { motion, useMotionTemplate, useMotionValue, useSpring } from 'framer-motion'
 import gsap from 'gsap'
-import { ArrowRight, Code2, Database, Users } from 'lucide-react'
+import {
+  ArrowRight,
+  Code2,
+  Database,
+  Users,
+  ShieldCheck,
+  Server,
+  Zap,
+  ExternalLink,
+  MessageCircle,
+  Download,
+  CheckCircle2,
+  Sparkles,
+  Layers,
+  Award,
+  ChevronRight,
+} from 'lucide-react'
 import { SectionHeading } from '@/components/SectionHeading'
 import { ScrollToTop } from '@/components/ScrollToTop'
+import { ProjectCard } from '@/components/ProjectCard'
+import { projects } from '@/data/projects'
+import { skills } from '@/data/skills'
+import { profile } from '@/data/profile'
 
 const stats = [
   { label: 'Years Experience', value: 7, suffix: '+' },
-  { label: 'Primary Framework', value: 0, suffix: 'Laravel' },
-  { label: 'Specialization', value: 0, suffix: 'SaaS' },
+  { label: 'Projects Delivered', value: 20, suffix: '+' },
+  { label: 'APIs & Services', value: 100, suffix: '+' },
+  { label: 'Uptime & Reliability', value: 99, suffix: '.9%' },
 ]
 
 function CountUp({ value, suffix = '' }: { value: number; suffix?: string }) {
@@ -34,10 +56,29 @@ function CountUp({ value, suffix = '' }: { value: number; suffix?: string }) {
     return () => cancelAnimationFrame(frame)
   }, [value])
 
-  return <span>{value ? display : null}{suffix}</span>
+  return (
+    <span>
+      {display}
+      {suffix}
+    </span>
+  )
 }
 
-function MagneticButton({ href, children, className }: { href: string; children: React.ReactNode; className?: string }) {
+function MagneticButton({
+  href,
+  children,
+  className,
+  target,
+  rel,
+  download,
+}: {
+  href: string
+  children: React.ReactNode
+  className?: string
+  target?: string
+  rel?: string
+  download?: boolean | string
+}) {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
   const springX = useSpring(x, { stiffness: 220, damping: 18, mass: 0.6 })
@@ -59,6 +100,9 @@ function MagneticButton({ href, children, className }: { href: string; children:
   return (
     <motion.a
       href={sitePath(href)}
+      target={target}
+      rel={rel}
+      download={download}
       onMouseMove={handleMove}
       onMouseLeave={reset}
       onMouseEnter={handleMove}
@@ -154,8 +198,19 @@ export default function HomePage() {
 
   const imageTransform = useMotionTemplate`translate(${mouseX}px, ${mouseY}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
 
+  // Featured landmark projects with authentic live screenshots
+  const featuredProjects = [
+    projects.find(p => p.id === 'webmittra')!,
+    projects.find(p => p.id === 'fretbox-saas')!,
+    projects.find(p => p.id === 'sbgbt-jobjatra')!,
+    projects.find(p => p.id === 'davv-flash-exam')!,
+    projects.find(p => p.id === 'shubhlagans')!,
+    projects.find(p => p.id === 'smvpst')!,
+  ].filter(Boolean)
+
   return (
     <div className="relative overflow-hidden bg-[#07081c] text-white">
+      {/* Background Ambience */}
       <div className="aurora-shell pointer-events-none absolute inset-0 opacity-90" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(124,58,237,0.18),transparent_20%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.14),transparent_24%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06),transparent_28%)]" />
@@ -164,52 +219,100 @@ export default function HomePage() {
       <div className="pointer-events-none absolute left-28 bottom-20 h-40 w-40 rounded-full border border-cyan-300/20 shadow-[0_0_70px_rgba(56,189,248,0.28)]" />
       <ParticleField />
 
-      <section ref={heroRef} className="relative px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-24">
+      {/* HERO SECTION */}
+      <section ref={heroRef} className="relative px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 sm:gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14">
-            <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, ease: 'easeOut' }} className="space-y-6 sm:space-y-8">
-              <p className="hero-badge inline-flex items-center gap-2 rounded-full border border-violet-400/25 bg-violet-500/10 px-3 py-2 text-[10px] uppercase tracking-[0.28em] text-violet-200 sm:px-4 sm:text-xs">Senior Laravel Developer &amp; Team Lead</p>
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, ease: 'easeOut' }}
+              className="space-y-6 sm:space-y-8"
+            >
+              {/* Status Badge */}
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="hero-badge inline-flex items-center gap-2 rounded-full border border-violet-400/30 bg-violet-500/10 px-3.5 py-1.5 text-[10px] uppercase tracking-[0.24em] text-violet-200 sm:text-xs">
+                  <Sparkles size={13} className="text-cyan-300" />
+                  Senior Laravel Developer &amp; Team Lead
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 text-[11px] font-semibold text-emerald-300">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Indore, India
+                </span>
+              </div>
+
+              {/* Title & Headings */}
               <div className="space-y-3 sm:space-y-4">
-                <p className="text-xs uppercase tracking-[0.32em] text-slate-300/80 sm:text-sm">Hi, I&apos;m</p>
+                <p className="text-xs uppercase tracking-[0.32em] text-slate-300/80 sm:text-sm">
+                  Hi, I&apos;m
+                </p>
                 <h1 className="text-4xl font-black leading-[0.92] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
                   <span className="hero-word block">Virendra</span>
-                  <span className="hero-word block bg-gradient-to-r from-amber-200 via-amber-300 to-yellow-500 bg-clip-text text-transparent">Yadav</span>
+                  <span className="hero-word block bg-gradient-to-r from-cyan-300 via-sky-300 to-violet-400 bg-clip-text text-transparent">
+                    Yadav
+                  </span>
                 </h1>
               </div>
-              <p className="hero-copy max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8 lg:text-xl">I build dependable SaaS and business applications with Laravel, CodeIgniter, PHP, and MySQL. With 7+ years of experience, I bring application architecture, REST API development, database optimization, and team leadership to every project.</p>
 
+              {/* Bio Summary */}
+              <p className="hero-copy max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
+                Senior Software Developer &amp; Technical Lead with <strong>7+ years</strong> of experience
+                building high-performance SaaS, ERP, Point-of-Sale (POS), and enterprise web applications
+                using <strong>Laravel, CodeIgniter, PHP 8, and MySQL</strong>.
+              </p>
+
+              {/* CTA Buttons */}
               <div className="hero-copy flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <MagneticButton href="/Virendra_Yadav_CV.pdf" className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 to-violet-500 px-5 py-3.5 text-sm font-semibold text-slate-950 shadow-[0_20px_60px_rgba(56,189,248,0.18)] transition duration-300 hover:brightness-110 sm:px-6 sm:py-4">
+                <MagneticButton
+                  href="/Virendra_Yadav_CV.pdf"
+                  download="Virendra_Yadav_CV.pdf"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 to-violet-500 px-5 py-3.5 text-xs font-bold text-slate-950 shadow-[0_20px_60px_rgba(56,189,248,0.22)] transition duration-300 hover:brightness-110 sm:px-6 sm:py-4 sm:text-sm"
+                >
+                  <Download size={16} />
                   Download Resume
                 </MagneticButton>
-                <MagneticButton href="/contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-500 via-cyan-400 to-slate-100 px-5 py-3.5 text-sm font-semibold text-slate-950 shadow-[0_0_30px_rgba(34,211,238,0.55),0_20px_60px_rgba(124,58,237,0.18)] transition duration-300 hover:brightness-105 sm:px-6 sm:py-4 animate-[pulse_2.8s_ease-in-out_infinite]">
-                  Let&apos;s Talk Code <ArrowRight size={18} />
+
+                <MagneticButton
+                  href={profile.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/15 px-5 py-3.5 text-xs font-bold text-emerald-200 shadow-[0_0_30px_rgba(16,185,129,0.25)] transition duration-300 hover:bg-emerald-500/25 sm:px-6 sm:py-4 sm:text-sm"
+                >
+                  <MessageCircle size={16} />
+                  WhatsApp Direct
                 </MagneticButton>
-                <MagneticButton href="/projects" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-slate-900/80 px-5 py-3.5 text-sm font-semibold text-slate-100 transition duration-300 hover:border-cyan-400/30 hover:bg-slate-900/95 sm:px-6 sm:py-4">
-                  View Projects
+
+                <MagneticButton
+                  href="/projects"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-slate-900/80 px-5 py-3.5 text-xs font-semibold text-slate-100 transition duration-300 hover:border-cyan-400/30 hover:bg-slate-900/95 sm:px-6 sm:py-4 sm:text-sm"
+                >
+                  Explore Projects <ArrowRight size={16} />
                 </MagneticButton>
               </div>
 
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              {/* Stats Counters Grid */}
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
                 {stats.map((item, index) => (
                   <motion.div
                     key={item.label}
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.3 + index * 0.08 }}
-                    whileHover={{ rotateX: 8, rotateY: -8, y: -6 }}
-                    style={{ transformStyle: 'preserve-3d' }}
-                    className="rounded-[1.5rem] border border-white/10 bg-slate-950/85 p-5 shadow-glow sm:rounded-[2rem] sm:p-6"
+                    whileHover={{ y: -4 }}
+                    className="rounded-2xl border border-white/10 bg-slate-950/80 p-4 shadow-glow sm:p-5"
                   >
-                    <p className="text-xl font-semibold text-white sm:text-2xl">
+                    <p className="text-2xl font-black text-cyan-300 sm:text-3xl">
                       <CountUp value={item.value} suffix={item.suffix} />
                     </p>
-                    <p className="mt-2 text-xs text-slate-400 sm:text-sm">{item.label}</p>
+                    <p className="mt-1 text-[11px] font-medium text-slate-400 sm:text-xs">
+                      {item.label}
+                    </p>
                   </motion.div>
                 ))}
               </div>
             </motion.div>
 
+            {/* 3D Neon Portrait Visual */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -222,19 +325,20 @@ export default function HomePage() {
               <div className="absolute -right-10 bottom-12 h-44 w-44 rounded-full bg-cyan-400/10 blur-3xl" />
               <motion.div
                 style={{ x: mouseX, y: mouseY, rotateX, rotateY }}
-                className="relative overflow-hidden rounded-[2rem] shadow-[0_40px_120px_rgba(15,23,42,0.35)] sm:rounded-[2.5rem]"
+                className="relative overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_40px_120px_rgba(15,23,42,0.45)] sm:rounded-[2.5rem]"
               >
                 <motion.div
-                  animate={{ y: [0, -12, 0] }}
+                  animate={{ y: [0, -10, 0] }}
                   transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
                   style={{ transform: imageTransform }}
-                  className="relative h-[320px] w-full sm:h-[420px] lg:h-[560px]"
+                  className="relative h-[340px] w-full sm:h-[430px] lg:h-[540px]"
                 >
                   <Image
                     src={sitePath('/virendra-yadav-neon-hero.png')}
-                    alt="Virendra Yadav, Senior Laravel Developer, at a blue and violet workstation"
+                    alt="Virendra Yadav, Senior Laravel Developer & Team Lead"
                     fill
-                    className="object-contain rounded-[2rem] object-top sm:rounded-[2.5rem]"
+                    priority
+                    className="object-contain object-top rounded-[2rem] sm:rounded-[2.5rem]"
                     sizes="(max-width: 640px) 100vw, (max-width: 1000px) 75vw, 760px"
                   />
                 </motion.div>
@@ -244,14 +348,34 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="px-4 pb-16 sm:px-5 lg:px-8">
+      {/* CORE DEVELOPMENT PILLARS */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <SectionHeading eyebrow="Quick Intro" title="Clean Code. Lasting Impact." subtitle="I connect business needs with maintainable PHP applications, reliable integrations, and thoughtful technical leadership." />
+          <SectionHeading
+            eyebrow="Core Strengths"
+            title="Clean Code. Scalable Architecture. Lasting Impact."
+            subtitle="I connect complex commercial needs with maintainable backend architecture, resilient APIs, and disciplined technical leadership."
+          />
           <div className="grid gap-6 md:grid-cols-3">
             {[
-              { title: 'Reliable Architecture', text: 'Laravel and CodeIgniter applications for multi-tenant SaaS, ERP, and business workflows.', icon: Code2 },
-              { title: 'APIs & Database Design', text: 'REST APIs, JWT authentication, MySQL optimization, and payment and messaging integrations.', icon: Database },
-              { title: 'Technical Leadership', text: 'End-to-end delivery, code reviews, developer mentoring, and stakeholder collaboration.', icon: Users },
+              {
+                title: 'Resilient Architecture & SaaS',
+                text: 'Architecting multi-tenant SaaS, ERPs, and POS systems with isolated schema designs, queues, and clean MVC separation.',
+                icon: Code2,
+                color: 'from-cyan-500/20 to-blue-500/20 text-cyan-300',
+              },
+              {
+                title: 'High-Concurrency APIs & MySQL',
+                text: 'Stateless REST APIs, JWT authentication, query profiling, index optimization, and sub-second transaction processing.',
+                icon: Database,
+                color: 'from-violet-500/20 to-indigo-500/20 text-violet-300',
+              },
+              {
+                title: 'Technical Leadership & Mentoring',
+                text: 'Directing agile delivery, conducting rigorous code reviews, mentoring junior developers, and liaising with stakeholders.',
+                icon: Users,
+                color: 'from-emerald-500/20 to-teal-500/20 text-emerald-300',
+              },
             ].map((feature, index) => {
               const Icon = feature.icon
               return (
@@ -261,15 +385,158 @@ export default function HomePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.6, delay: index * 0.12 }}
-                  whileHover={{ y: -8, rotateX: 6, rotateY: -6 }}
-                  className="rounded-[2rem] border border-white/10 bg-slate-950/80 p-8 shadow-[0_30px_80px_rgba(124,58,237,0.12)] transition duration-300 hover:border-violet-300/20 hover:bg-slate-900/90"
+                  whileHover={{ y: -8 }}
+                  className="rounded-[2rem] border border-white/10 bg-slate-950/80 p-8 shadow-[0_30px_80px_rgba(124,58,237,0.12)] transition duration-300 hover:border-cyan-300/30 hover:bg-slate-900/90"
                 >
-                  <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-3xl bg-gradient-to-br from-cyan-500/10 to-violet-500/10 text-cyan-200 shadow-lg shadow-cyan-500/10"><Icon size={24} /></div>
-                  <h3 className="text-xl font-semibold text-white">{feature.title}</h3>
-                  <p className="mt-3 text-sm text-slate-400">{feature.text}</p>
+                  <div
+                    className={`mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${feature.color} shadow-lg`}
+                  >
+                    <Icon size={26} />
+                  </div>
+                  <h3 className="text-xl font-bold text-white">{feature.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{feature.text}</p>
                 </motion.div>
               )
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURED LANDMARK PROJECTS SECTION */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8 border-t border-white/10 bg-slate-950/40">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end mb-10">
+            <div>
+              <span className="inline-block rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-cyan-200">
+                Landmark Builds
+              </span>
+              <h2 className="mt-3 text-2xl font-black text-white sm:text-3xl lg:text-4xl">
+                Featured Work &amp; Live Systems
+              </h2>
+              <p className="mt-2 text-sm text-slate-400 max-w-2xl">
+                Selected production platforms powering restaurant POS operations, residential SaaS properties, and community portals.
+              </p>
+            </div>
+
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-slate-900 px-5 py-2.5 text-xs font-bold text-cyan-200 transition hover:bg-cyan-400/15"
+            >
+              <span>View All {projects.length} Projects</span>
+              <ArrowRight size={14} />
+            </Link>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {featuredProjects.map(project => (
+              <ProjectCard
+                key={project.id || project.title}
+                id={project.id}
+                title={project.title}
+                company={project.company}
+                category={project.category}
+                description={project.description}
+                longDescription={project.longDescription}
+                tech={project.tech}
+                featured={project.featured}
+                image={project.image}
+                links={project.links}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TECHNICAL STACK HIGHLIGHT STRIP */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="overflow-hidden rounded-[2.5rem] border border-white/10 bg-gradient-to-br from-slate-900/90 via-slate-950/90 to-slate-900/90 p-8 shadow-glow sm:p-12">
+            <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-cyan-400">
+                  Technical Arsenal
+                </span>
+                <h2 className="mt-2 text-2xl font-black text-white sm:text-3xl">
+                  Built on 7+ Years of Enterprise PHP Mastery
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                  From multi-tenant database normalization to mission-critical payment gateways and WhatsApp Cloud API bots, I deliver end-to-end backends ready for production scale.
+                </p>
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    href="/skills"
+                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 to-violet-500 px-5 py-2.5 text-xs font-bold text-slate-950 transition hover:brightness-110"
+                  >
+                    <span>View All Technical Skills</span>
+                    <ArrowRight size={14} />
+                  </Link>
+                  <Link
+                    href="/about"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/80 px-5 py-2.5 text-xs font-semibold text-slate-300 transition hover:text-white"
+                  >
+                    <span>Career Timeline</span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Quick Tech Badges Grid */}
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                {[
+                  { name: 'Laravel', level: '96%', tag: 'Primary Framework' },
+                  { name: 'PHP 8.x', level: '95%', tag: 'Object-Oriented' },
+                  { name: 'MySQL', level: '92%', tag: 'Query Optimization' },
+                  { name: 'REST APIs', level: '94%', tag: 'JWT & OAuth2' },
+                  { name: 'SaaS Tenancy', level: '92%', tag: 'Multi-Tenant' },
+                  { name: 'Integrations', level: '93%', tag: 'Razorpay / WhatsApp' },
+                ].map(item => (
+                  <div
+                    key={item.name}
+                    className="rounded-2xl border border-white/10 bg-slate-950/70 p-4 transition hover:border-cyan-400/30"
+                  >
+                    <p className="text-sm font-bold text-white">{item.name}</p>
+                    <p className="mt-0.5 text-[11px] font-semibold text-cyan-400">{item.level}</p>
+                    <p className="mt-1 text-[10px] text-slate-400">{item.tag}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL CALL TO ACTION */}
+      <section className="px-4 pb-20 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl text-center">
+          <div className="relative overflow-hidden rounded-[2.5rem] border border-cyan-400/30 bg-gradient-to-br from-violet-950/40 via-slate-900/80 to-cyan-950/40 p-8 shadow-[0_20px_80px_rgba(34,211,238,0.15)] backdrop-blur-md sm:p-14">
+            <span className="inline-block rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-1 text-xs font-semibold uppercase tracking-wider text-cyan-200">
+              Let&apos;s Build Together
+            </span>
+            <h2 className="mt-4 text-3xl font-black text-white sm:text-4xl lg:text-5xl">
+              Ready to Scale Your Next Web Application?
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base">
+              Whether you need senior architecture leadership for a complex SaaS, high-speed API development, or full-stack Laravel delivery, I am available to help you succeed.
+            </p>
+
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 to-violet-500 px-6 py-3.5 text-xs font-bold text-slate-950 shadow-lg transition hover:brightness-110 sm:text-sm"
+              >
+                <span>Start a Project Discussion</span>
+                <ArrowRight size={16} />
+              </Link>
+              <a
+                href={profile.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/15 px-6 py-3.5 text-xs font-bold text-emerald-200 transition hover:bg-emerald-500/25 sm:text-sm"
+              >
+                <MessageCircle size={16} />
+                <span>Instant WhatsApp Chat</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -278,7 +545,3 @@ export default function HomePage() {
     </div>
   )
 }
-
-
-
-
